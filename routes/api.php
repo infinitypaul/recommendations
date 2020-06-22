@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1'], function () {
     Route::group(['namespace' => 'Products', 'prefix' => 'products'], function (){
         Route::group(['prefix' => 'recommended'], function (){
-            Route::get('/{city}', 'RecommendedController@index')->where('city', '[A-Za-z]+');;
+            Route::get('/{city}', 'RecommendedController')->where('city', '[A-Za-z]+');
         });
     });
 });

@@ -15,7 +15,6 @@ class ApiResponse
         if($response->ok()){
             $resp->responseData = $response->json();
         } else {
-            $resp->responseData = $response->json();
             $response->throw();
         }
         return $resp;

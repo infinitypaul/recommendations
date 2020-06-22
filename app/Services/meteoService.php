@@ -10,9 +10,9 @@ class meteoService
 
     private $baseUrl = 'https://api.meteo.lt/v1';
 
-    protected $path = '';
+    protected $path;
 
-    protected $allowedMethods = ['get', 'post'];
+    protected static $allowedMethods = ['get', 'post'];
 
     private static $method = 'get';
 
@@ -22,7 +22,10 @@ class meteoService
     }
 
     public static function addMethod($method){
-        return self::$method = $method;
+        if(in_array(strtolower($method), self::$allowedMethods)){
+            return self::$method = $method;
+        }
+        return self::$method;
     }
 
     public function addBody($name, $value){

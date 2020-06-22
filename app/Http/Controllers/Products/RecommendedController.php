@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CityResource;
-use App\Http\Resources\ProductResource;
 use App\Product;
 use App\Services\meteoService;
 use Illuminate\Http\Request;
@@ -12,14 +11,24 @@ use Illuminate\Http\Request;
 
 class RecommendedController extends Controller
 {
-    public function index(Request $request)
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \App\Http\Resources\CityResource
+     */
+    public function __invoke(Request $request)
     {
-        $currentWeather = (new meteoService('/places/'.$request->city.'/forecasts/long-term'))
+        $url = '/places/'.$request->city.'/forecasts/long-term';
+
+        $foreCast = (new meteoService($url))
             ->makeRequest()
-            ->getResponseData()['forecastTimestamps'][0]['conditionCode'];
+            ->getResponseData();
 
-        $products = Product::tag($currentWeather)->paginate(10);
+       return app(ProductController::class)(
+            $foreCast['forecastTimestamps'][0]['conditionCode'],
+            $request->city
+        );
 
-        return (new CityResource($products, $currentWeather, $request->city));
     }
 }
