@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'v1'], function () {
+    Route::group(['namespace' => 'Products', 'prefix' => 'products'], function (){
+        Route::group(['prefix' => 'recommended'], function (){
+            Route::get('/{city}', 'RecommendedController@index')->where('city', '[A-Za-z]+');;
+        });
+    });
+});
