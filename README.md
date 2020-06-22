@@ -2,6 +2,11 @@
 <p align="center"><a href="https://medium.com/@infinitypaul">Creator</a> | <a href="">Getting Started</a></p>
 
 <p>&nbsp;</p>
+## Tech Stack
+
+* Laravel
+* Mysql
+* PHP
 
 ## Download Instruction
 

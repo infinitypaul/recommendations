@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,10 +24,16 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      *
+     * @param \Illuminate\Routing\UrlGenerator $url
+     *
      * @return void
      */
-    public function boot()
+    public function boot(UrlGenerator $url)
     {
         JsonResource::withoutWrapping();
+        if ($this->app->environment() == 'production') {
+            $url->forceScheme('https');
+            //Force URL to use HTTPS
+        }
     }
 }
