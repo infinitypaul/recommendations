@@ -1,7 +1,6 @@
 <p align="center">Returns product recommendations depending on current weather.</p>
-<p align="center"><a href="https://medium.com/@infinitypaul">Creator</a> | <a href="">Getting Started</a></p>
+<p align="center"><a href="https://medium.com/@infinitypaul">Creator</a> | <a href="https://infinityadeo.herokuapp.com/api/v1/products/recommended/alanta">Demo URL</a></p>
 
-<p>&nbsp;</p>
 ## Tech Stack
 
 * Laravel
